@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="junitTestDrive" basedir="." default="test">
+
+  <target name="init">
+    <property name="src.dir" value="src" />    
+    <property name="build.dir" value="build" />
+    <property name="class.dir" value="${build.dir}/classes" />
+    <property name="reports.dir" value="reports" />
+    <path id="junit.class.path">
+      <pathelement location="lib/junit.jar" />
+      <pathelement location="${class.dir}" />
+    </path>
+  </target>
+  
+  <target name="prepare" depends="init">
+    <mkdir dir="${class.dir}" />
+    <mkdir dir="${reports.dir}" />
+  </target>
+  
+  <target name="compile" depends="prepare">
+    <javac srcdir="${src.dir}"
+	   destdir="${class.dir}"
+	   includeantruntime="false">
+      <classpath refid="junit.class.path" />
+    </javac>
+  </target>
+
+  <target name="test" depends="compile">
+    <junit printsummary="on" haltonfailure="on" showoutput="on" >
+      <classpath refid="junit.class.path" />
+
+      <batchtest fork="on" todir="${reports.dir}/">
+	<formatter type="xml"/>
+	<fileset dir="${src.dir}">
+	  <include name="*Test*.java" />
+	</fileset>
+      </batchtest>
+    </junit>
+  </target>
+  
+  <target name="jarfile" depends="test">
+    <jar destfile="${build.dir}/junitTestDrive.jar"
+	 basedir="${class.dir}" />
+  </target>
+  
+  <target name="clean" depends="init">
+    <delete dir="${build.dir}" />
+  </target>
+
+  <target name="report" depends="init">
+    <junitreport todir="${reports.dir}">
+      <fileset dir="${reports.dir}" includes="TEST-*.xml" />
+      <report format="noframes" todir="${reports.dir}" />
+    </junitreport>
+  </target>
+</project>
