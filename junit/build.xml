@@ -29,12 +29,9 @@
     <junit printsummary="on" haltonfailure="on" showoutput="on" >
       <classpath refid="junit.class.path" />
 
-      <batchtest fork="on" todir="${reports.dir}/">
+      <test name="movies.tests.MovieListTest" fork="on" todir="${reports.dir}/">
 	<formatter type="xml"/>
-	<fileset dir="${src.dir}">
-	  <include name="*Test*.java" />
-	</fileset>
-      </batchtest>
+      </test>
     </junit>
   </target>
   
