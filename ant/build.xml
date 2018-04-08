@@ -1,10 +1,29 @@
 <?xml version="1.0" ?>
 
-<project name="FirstTest" default="world">
-  <target name="hello">
-    <echo message="Hello" />
+<project name="JarBuild" basedir="." default="jarfile">
+  
+  <target name="init">
+    <property name="project.name" value="helloWorld" />
+    <property name="src.dir" value="src" />
+    <property name="build.dir" value="build" />
+    <property name="classes.dir" value="${build.dir}/classes" />
   </target>
-  <target name="world" depends="hello">
-    <echo message="World!" />
+  
+  <target name="prepare" depends="init">
+    <mkdir dir="${classes.dir}" />
   </target>
+  
+  <target name="compile" depends="prepare" >
+    <javac srcdir="${src.dir}" destdir="${classes.dir}" />
+  </target>
+
+  <target name="jarfile" depends="compile">
+    <jar destfile="${build.dir}/${project.name}.jar"
+	 basedir="${classes.dir}" />
+  </target>
+  
+  <target name="clean" depends="init">
+    <delete dir="${build.dir}" />
+  </target>
+  
 </project>
