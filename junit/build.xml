@@ -22,6 +22,8 @@
 	   includeantruntime="false"
 	   nowarn="off">
       <classpath refid="junit.class.path" />
+      <compilerarg value="-Xlint:all" />
+      <compilerarg value="-Werror" />
     </javac>
   </target>
 

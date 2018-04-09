@@ -5,10 +5,10 @@ import java.util.List;
 import junit.framework.TestCase;
 
 public class OneItemListTest extends TestCase {
-    private List oneItemList;
+    private List<String> oneItemList;
 
     @Override protected void setUp() {
-	oneItemList = new ArrayList();
+	oneItemList = new ArrayList<>();
 	oneItemList.add("One");
     }
     
@@ -20,5 +20,9 @@ public class OneItemListTest extends TestCase {
 
     public void testIsEmpty() {
 	assertFalse("One item list should report non-empty.", oneItemList.isEmpty());
+    }
+
+    public static void main(String[] args) {
+	junit.textui.TestRunner.run(OneItemListTest.class);
     }
 }

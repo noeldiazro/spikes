@@ -6,11 +6,11 @@ import java.util.List;
 import junit.framework.TestCase;
 
 public class EmptyListTest extends TestCase {
-    private List emptyList;
+    private List<String> emptyList;
     
     @Override protected void setUp() throws Exception {
 	super.setUp();
-	emptyList = new ArrayList();
+	emptyList = new ArrayList<>();
     }
     
     public void testSize() {
@@ -24,8 +24,12 @@ public class EmptyListTest extends TestCase {
     }
 
     public void testIterator() {
-	Iterator emptyListIterator = emptyList.iterator();
+	Iterator<String> emptyListIterator = emptyList.iterator();
 	assertFalse("Iterator from empty list should be empty.",
 		    emptyListIterator.hasNext());
+    }
+
+    public static void main(String[] args) {
+	junit.textui.TestRunner.run(EmptyListTest.class);
     }
 }
