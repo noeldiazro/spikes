@@ -14,7 +14,6 @@
   
   <target name="prepare" depends="init">
     <mkdir dir="${class.dir}" />
-    <mkdir dir="${reports.dir}" />
   </target>
   
   <target name="compile" depends="prepare">
@@ -26,11 +25,16 @@
     </javac>
   </target>
 
-  <target name="test" depends="compile">
-    <junit printsummary="on" haltonfailure="on" showoutput="on" >
+  <target name="prepareTest" depends="compile">
+    <mkdir dir="${reports.dir}" />    
+  </target>
+  
+  <target name="test" depends="prepareTest">
+    <junit>
       <classpath refid="junit.class.path" />
-      <formatter type="plain" />
-      <batchtest fork="on" todir="${reports.dir}/">
+      <formatter type="brief" usefile="false" />
+      <formatter type="xml" />
+      <batchtest fork="on" todir="${reports.dir}">
 	<fileset dir="${src.dir}">
 	  <include name="**/*Test*.java" />
 	</fileset>
@@ -48,7 +52,7 @@
     <delete dir="${reports.dir}" />
   </target>
 
-  <target name="report" depends="test">
+  <target name="report" depends="init">
     <junitreport todir="${reports.dir}">
       <fileset dir="${reports.dir}" includes="TEST-*.xml" />
       <report format="noframes" todir="${reports.dir}" />
