@@ -20,7 +20,8 @@
   <target name="compile" depends="prepare">
     <javac srcdir="${src.dir}"
 	   destdir="${class.dir}"
-	   includeantruntime="false">
+	   includeantruntime="false"
+	   nowarn="off">
       <classpath refid="junit.class.path" />
     </javac>
   </target>
@@ -28,10 +29,12 @@
   <target name="test" depends="compile">
     <junit printsummary="on" haltonfailure="on" showoutput="on" >
       <classpath refid="junit.class.path" />
-
-      <test name="movies.tests.MovieListTest" fork="on" todir="${reports.dir}/">
-	<formatter type="xml"/>
-      </test>
+      <formatter type="plain" />
+      <batchtest fork="on" todir="${reports.dir}/">
+	<fileset dir="${src.dir}">
+	  <include name="**/*Test*.java" />
+	</fileset>
+      </batchtest>
     </junit>
   </target>
   
@@ -42,9 +45,10 @@
   
   <target name="clean" depends="init">
     <delete dir="${build.dir}" />
+    <delete dir="${reports.dir}" />
   </target>
 
-  <target name="report" depends="init">
+  <target name="report" depends="test">
     <junitreport todir="${reports.dir}">
       <fileset dir="${reports.dir}" includes="TEST-*.xml" />
       <report format="noframes" todir="${reports.dir}" />
