@@ -1,0 +1,22 @@
+<project default="test">
+
+  <target name="compile">
+    <javac srcdir="." includeantruntime="false">
+      <classpath>
+	<pathelement path="../lib/junit.jar" />
+      </classpath>
+    </javac>
+  </target>
+  
+  <target name="test" depends="compile">
+    <junit showoutput="yes">
+      <formatter type="brief" />
+      <classpath>
+	<pathelement path="../lib/junit.jar" />
+	<pathelement path="." />
+      </classpath>
+      <test name="AllTests" />
+    </junit>
+  </target>
+
+</project>
