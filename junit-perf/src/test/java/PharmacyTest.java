@@ -13,6 +13,10 @@ public class PharmacyTest extends TestCase {
     private static final long SLEEP_MILLIS = 2000;
     
     private Pharmacy pharmacy;
+
+    public PharmacyTest(String name) {
+	super(name);
+    }
     
     @Override
     protected void setUp() throws Exception {
