@@ -10,7 +10,7 @@ import prescriptions.Pharmacy;
 public class PharmacyTest extends TestCase {
     private static final int NUMBER_OF_PRESCRIPTIONS = 100;
     private static final String PRESCRIBER = "Dr. Jekyll";
-    private static final long SLEEP_MILLIS = 2000;
+    private static final long SLEEP_MILLIS = 1000;
     
     private Pharmacy pharmacy;
 
